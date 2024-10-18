@@ -1,4 +1,4 @@
-# GCP - guide study
+# GCP - Study guide
 
  - [1. Google Cloud Computing Foundations Certificate](#gcp---guide-study)
    - [1.1 Google Cloud Computing Foundations: Cloud Computing Fundamentals (8h)](#google-cloud-computing-foundations-cloud-computing-fundamentals)
