@@ -1,6 +1,6 @@
 # GCP - guide study
 
-- 1. Google Cloud Computing Foundations Certificate
+### - [1. Google Cloud Computing Foundations Certificate](#gcp-study-notes/blob/main)
    - [1.1 Google Cloud Computing Foundations: Cloud Computing Fundamentals (8h)](#google-cloud-computing-foundations-cloud-computing-fundamentals)
    - [1.2 Google Cloud Computing Foundations: Infrastructure in Google Cloud (8h)](#google-cloud-computing-foundations-infrastructure-in-google-cloud)
    - [1.3 Google Cloud Computing Foundations: Networking & Security in Google Cloud (8h)](#google-cloud-computing-foundations-networking--security-in-google-cloud)
