@@ -10,7 +10,7 @@
    - [1.7 Build a Secure Google Cloud Network (6h:45min)](#build-a-secure-google-cloud-network)
    - [1.8 Prepare Data for ML APIs on Google Cloud (6h:30min)](#prepare-data-for-ml-apis-on-google-cloud)
 
- - [2. Getting Started with Google Cloud Learning Path](#getting-started-with-google-cloud-learning-path)
+ - [2. Getting Started with Google Cloud Learning Path](#google-cloud-computing-foundations-certificate)
    - [2.1 A Tour of Google Cloud Hands-on Labs (45min)](#a-tour-of-google-cloud-hands-on-lab)
    - [2.2 Implement Load Balancing on Compute Engine (3h:30min)](#implement-load-balancing-on-compute-engine)
    - [2.3 Google Cloud Fundamentals: Core Infrastructure (5h)](#google-cloud-fundamentals-core-infrastructure)
