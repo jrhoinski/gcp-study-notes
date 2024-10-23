@@ -28,8 +28,27 @@
 
 <br>  
 
-##### Set Up Network and HTTP Load Balancers
+### Set Up Network and HTTP Load Balancers  
 
+**GSP007**  
+
+my notes: 
+```
+Create instance template with an initialisation script;
+A destination pool with an access point to all the instances in a group;
+A group of instances managed using the template with two VMs;
+Visualise the instances created;
+Configure a firewall to connect to the machines on port 80;
+Create a level 3 network load balancer for the group of instances created previously;
+List the project's routing rules to see that the destination is a group of instances;
+Use the load balancer's IP address to access it in the browser;
+
+Create an HTTPS load balancer;
+```
+
+Translated with DeepL.com (free version)```
+
+```
 **Overview**  
 
 In this hands-on lab you learn the differences between a network load balancer and an HTTP load balancer, and how to set them up for your applications running on Compute Engine virtual machines (VMs).
