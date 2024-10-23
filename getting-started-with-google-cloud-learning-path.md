@@ -142,6 +142,8 @@ curl http://[IP_ADDRESS]
 
 When you configure the load balancing service, your virtual machine instances receives packets that are destined for the static external IP address you configure. Instances made with a Compute Engine image are automatically configured to handle this IP address.
 
+Note: Learn more about how to set up network load balancing from the [External TCP/UDP Network Load Balancing overview Guide.](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service?hl=pt-br)
+
 1. Create a static external IP address for your load balancer:
 ```
 gcloud compute addresses create network-lb-ip-1 \
@@ -233,13 +235,26 @@ gcloud compute instance-templates create lb-backend-template \
      tee /var/www/html/index.html
      systemctl restart apache2'
 ```
-(MIGs) let you operate apps on multiple identical VMs. You can make your workloads scalable and highly available by taking advantage of automated MIG services, including: autoscaling, autohealing, regional (multiple zone) deployment, and automatic updating.
+[Managed instance groups](https://cloud.google.com/compute/docs/instance-groups?hl=pt-br) (MIGs) let you operate apps on multiple identical VMs. You can make your workloads scalable and highly available by taking advantage of automated MIG services, including: autoscaling, autohealing, regional (multiple zone) deployment, and automatic updating.
 
 2. Create a managed instance group based on the template:
 gcloud compute instance-groups managed create lb-backend-group \
 ```
    --template=lb-backend-template --size=2 --zone=us-east4-a
 ```
+3. Create the fw-allow-health-check firewall rule.
+```
+gcloud compute firewall-rules create fw-allow-health-check \
+  --network=default \
+  --action=allow \
+  --direction=ingress \
+  --source-ranges=130.211.0.0/22,35.191.0.0/16 \
+  --target-tags=allow-health-check \
+  --rules=tcp:80
+```
+
+Note: The ingress rule allows traffic from the Google Cloud health checking systems (130.211.0.0/22 and 35.191.0.0/16). This lab uses the target tag allow-health-check to identify the VMs  
+
 
 4. Create the fw-allow-health-check firewall rule.
 ```
@@ -275,7 +290,7 @@ gcloud compute health-checks create http http-basic-check \
    --port 80
 ```
 
-Note: Google Cloud provides health checking mechanisms that determine whether backend instances respond properly to traffic. For more information, please refer to the Creating health checks document.
+Note: Google Cloud provides health checking mechanisms that determine whether backend instances respond properly to traffic. For more information, please refer to the [Creating health checks document.](https://cloud.google.com/load-balancing/docs/health-checks?hl=pt-br)
 
 6. Create a backend service:
 ```
@@ -294,7 +309,7 @@ gcloud compute backend-services add-backend web-backend-service \
   --global
 ```
   
-8. Create a URL map to route the incoming requests to the default backend service:
+8. Create a [URL map](https://cloud.google.com/load-balancing/docs/url-map-concepts?hl=pt-br) to route the incoming requests to the default backend service:
 gcloud compute url-maps create web-map-http \
 ```
     --default-service web-backend-service
@@ -321,6 +336,9 @@ gcloud compute forwarding-rules create http-content-rule \
    --target-http-proxy=http-lb-proxy \
    --ports=80
 ```
+
+Note: A [forwarding rule](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts?hl=pt-br) and its corresponding IP address represent the frontend configuration of a Google Cloud load balancer. Learn more about the general understanding of forwarding rules from the [Forwarding rule overview Guide.](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts?hl=pt-br)    
+
 
 <br>  
 
