@@ -26,25 +26,32 @@
 ####	2.2.3 Getting Started with Cloud Shell and gcloud [2]
 #### 2.2.4 Set Up Network and HTTP Load Balancers
 
+<br>  
+
 ##### Set Up Network and HTTP Load Balancers
 
-Overview
+**Overview**  
+
 In this hands-on lab you learn the differences between a network load balancer and an HTTP load balancer, and how to set them up for your applications running on Compute Engine virtual machines (VMs).
 
 There are several ways you can load balance on Google Cloud. This lab takes you through the set up of the following load balancers:
 
-Network Load Balancer
-HTTP(s) Load Balancer
+[Network Load Balancer](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service?hl=pt-br)  
+[HTTP(s) Load Balancer](https://cloud.google.com/load-balancing/docs/https?hl=pt-br)  
+
 You are encouraged to type the commands yourself, which can help you learn the core concepts. Many labs include a code block that contains the required commands. You can easily copy and paste the commands from the code block into the appropriate places during the lab.
 
-What you'll learn
+**What you'll learn**  
 
-Set up a network load balancer.
-Set up an HTTP load balancer.
-Get hands-on experience learning the differences between network load balancers and HTTP load balancers.
+- Set up a network load balancer.  
+- Set up an HTTP load balancer.  
+- Get hands-on experience learning the differences between network load balancers and HTTP load balancers.  
+
+<br>  
+
+**Task 1. Set the default region and zone for all resources**  
 
 
-Task 1. Set the default region and zone for all resources
 1. Set the default region:
 ```
 gcloud config set compute/region us-east4
@@ -54,8 +61,10 @@ gcloud config set compute/region us-east4
 gcloud config set compute/zone us-east4-a
 ```
 Learn more about choosing zones and regions in Compute Engine's documentation Regions and Zones Guide.
+<br>  
 
-Task 2. Create multiple web server instances
+**Task 2. Create multiple web server instances**  
+
 For this load balancing scenario, create three Compute Engine VM instances and install Apache on them, then add a firewall rule that allows HTTP traffic to reach the instances.
 
 The code provided sets the zone to us-east4-a. Setting the tags field lets you reference these instances all at once, such as with a firewall rule. These commands also install Apache on each instance and give each instance a unique home page.
@@ -127,8 +136,10 @@ gcloud compute instances list
 curl http://[IP_ADDRESS]
 ```
 
+<br>  
 
-Task 3. Configure the load balancing service
+**Task 3. Configure the load balancing service**  
+
 When you configure the load balancing service, your virtual machine instances receives packets that are destined for the static external IP address you configure. Instances made with a Compute Engine image are automatically configured to handle this IP address.
 
 1. Create a static external IP address for your load balancer:
@@ -161,9 +172,11 @@ gcloud compute forwarding-rules create www-rule \
     --ports 80 \
     --address network-lb-ip-1 \
     --target-pool www-pool
-``` 
+```
+
+<br>  
     
-Task 4. Sending traffic to your instances
+**Task 4. Sending traffic to your instances**  
 
 Now that the load balancing service is configured, you can start sending traffic to the forwarding rule and watch the traffic be dispersed to different instances.
 
@@ -188,7 +201,10 @@ The response from the curl command alternates randomly among the three instances
 
 5. Use Ctrl + C to stop running the command.
 
-Task 5. Create an HTTP load balancer
+<br>  
+
+**Task 5. Create an HTTP load balancer**  
+
 HTTP(S) Load Balancing is implemented on Google Front End (GFE). GFEs are distributed globally and operate together using Google's global network and control plane. You can configure URL rules to route some URLs to one set of instances and route other URLs to other instances.
 
 Requests are always routed to the instance group that is closest to the user, if that group has enough capacity and is appropriate for the request. If the closest group does not have enough capacity, the request is sent to the closest group that does have capacity.
@@ -306,22 +322,23 @@ gcloud compute forwarding-rules create http-content-rule \
    --ports=80
 ```
 
+<br>  
 
-Task 6. Testing traffic sent to your instances
+**Task 6. Testing traffic sent to your instances**  
 
-1. In the Google Cloud console, from the Navigation menu, go to Network services > Load balancing.
+1. In the Google Cloud console, from the Navigation menu, go to Network services > Load balancing.  
 
-2. Click on the load balancer that you just created (web-map-http).
+2. Click on the load balancer that you just created (web-map-http).  
 
-3. In the Backend section, click on the name of the backend and confirm that the VMs are Healthy. If they are not healthy, wait a few moments and try reloading the page.
+3. In the Backend section, click on the name of the backend and confirm that the VMs are Healthy. If they are not healthy, wait a few moments and try reloading the page.  
 
-4. When the VMs are healthy, test the load balancer using a web browser, going to http://IP_ADDRESS/, replacing IP_ADDRESS with the load balancer's IP address.
+4. When the VMs are healthy, test the load balancer using a web browser, going to http://IP_ADDRESS/, replacing IP_ADDRESS with the load balancer's IP address.  
 
-This may take three to five minutes. If you do not connect, wait a minute, and then reload the browser.
+This may take three to five minutes. If you do not connect, wait a minute, and then reload the browser.  
 
-Your browser should render a page with content showing the name of the instance that served the page, along with its zone (for example, Page served from: lb-backend-group-xxxx).
+Your browser should render a page with content showing the name of the instance that served the page, along with its zone (for example, Page served from: lb-backend-group-xxxx).  
 
-
+<br>  <br>  
 
 ####	2.2.5 Implement Load Balancing on Compute Engine: Challenge Lab [1]
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
