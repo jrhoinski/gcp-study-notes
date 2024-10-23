@@ -44,11 +44,8 @@ List the project's routing rules to see that the destination is a group of insta
 Use the load balancer's IP address to access it in the browser;
 
 Create an HTTPS load balancer;
-```
+```   
 
-Translated with DeepL.com (free version)```
-
-```
 **Overview**  
 
 In this hands-on lab you learn the differences between a network load balancer and an HTTP load balancer, and how to set them up for your applications running on Compute Engine virtual machines (VMs).
