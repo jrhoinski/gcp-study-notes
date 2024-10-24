@@ -373,8 +373,96 @@ This may take three to five minutes. If you do not connect, wait a minute, and t
 Your browser should render a page with content showing the name of the instance that served the page, along with its zone (for example, Page served from: lb-backend-group-xxxx).  
 
 <br>  <br>  
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
 ####	2.2.5 Implement Load Balancing on Compute Engine: Challenge Lab [1]
+
+Implement Load Balancing on Compute Engine: Challenge Lab
+
+**GSP313**
+
+my notes: 
+```
+blabla bla
+```   
+
+**Overview**  
+
+In a challenge lab you’re given a scenario and a set of tasks. Instead of following step-by-step instructions, you will use the skills learned from the labs in the course to figure out how to complete the tasks on your own! An automated scoring system (shown on this page) will provide feedback on whether you have completed your tasks correctly.
+
+When you take a challenge lab, you will not be taught new Google Cloud concepts. You are expected to extend your learned skills, like changing default values and reading and researching error messages to fix your own mistakes.
+
+To score 100% you must successfully complete all tasks within the time period!
+
+This lab is recommended for students who have enrolled in the [Implement Load Balancing on Compute Engine](https://www.cloudskillsboost.google/course_templates/648) skill badge. Are you ready for the challenge?
+
+**Topics tested**
+- Create an instance.
+- Create an HTTP load balancer in front of two web servers.
+<br>
+
+**Challenge scenario** 
+You have started a new role as a Junior Cloud Engineer for Jooli, Inc. You are expected to help manage the infrastructure at Jooli. Common tasks include provisioning resources for projects.
+
+You are expected to have the skills and knowledge for these tasks, so step-by-step guides are not provided.
+
+Some Jooli, Inc. standards you should follow:
+
+Create all resources in the default region or zone, unless otherwise directed. The default region is REGION, and the default zone is ZONE.  
+
+Naming normally uses the format team-resource; for example, an instance could be named nucleus-webserver1.  
+
+Make sure to create an instance template in global location.  
+
+Allocate cost-effective resource sizes. Projects are monitored, and excessive resource use will result in the containing project's termination (and possibly yours), so plan carefully. This is the guidance the monitoring team is willing to share: unless directed, use e2-micro for small Linux VMs, and use e2-medium for Windows or other applications, such as Kubernetes nodes.  
+
+<br>
+**Your challenge**
+As soon as you sit down at your desk and open your new laptop, you receive several requests from the Nucleus team. Read through each description, and then create the resources. 
+
+<br>
+**Task 1. Create a project jumphost instance** 
+You will use this instance to perform maintenance for the project.  
+
+Requirements:  
+
+Name the instance Instance name.
+Create the instance in the ZONE zone.
+Use an e2-micro machine type.
+Use the default image type (Debian Linux). 
+
+<br>
+**Task 2. Set up an HTTP load balancer**  
+
+You will serve the site via nginx web servers, but you want to ensure that the environment is fault-tolerant. Create an HTTP load balancer with a managed instance group of 2 nginx web servers. Use the following code to configure the web servers; the team will replace this with their own configuration later. 
+
+```
+cat << EOF > startup.sh
+#! /bin/bash
+apt-get update
+apt-get install -y nginx
+service nginx start
+sed -i -- 's/nginx/Google Cloud Platform - '"\$HOSTNAME"'/' /var/www/html/index.nginx-debian.html
+EOF
+
+``` 
+Note: There is a limit to the resources you are allowed to create in your project, so do not create more than 2 instances in your managed instance group. If you do, the lab might end and you might be banned.
+
+You need to:  
+
+- Create an instance template. Don't use the default machine type. Make sure you specify e2-medium as the machine type and create the Global template.
+- Create a managed instance group based on the template.
+- Create a firewall rule named as Firewall rule to allow traffic (80/tcp).
+- Create a health check.
+- Create a backend service and add your instance group as the backend to the backend service group with named port (http:80).
+- Create a URL map, and target the HTTP proxy to route the incoming requests to the default backend service.
+- Create a target HTTP proxy to route requests to your URL map
+- Create a forwarding rule.
+
+  Note: You may need to wait for 5 to 7 minutes to get the score for this task.
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Google Cloud Fundamentals: Core Infrastructure
